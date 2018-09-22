@@ -1,0 +1,98 @@
+#Noyade Sèche
+
+jour = input("Saisissez le jour : ") #On récupère le jour
+mois = int(input("Saisissez le mois (en chiffre) : ")) #On récupère le mois
+annee = input("Saisissez l'année : ") #On récupère l'année
+
+
+recupannee = float(annee[2:4]) #On récupère la position 2 et 3 de l'année (1947 => 47)
+recupannee2 = int(annee[0:2]) #On récupère la position 0 et 1 de l'année (1947=> 19)
+jour = float(jour) #On initialise le jour en float pour calcultotal
+
+calcultotal = recupannee + (recupannee/4) + jour #On ajoute 1/4 et on ajoute le jour pour répondre au .2 et .3
+
+def calculmois(calcultotal): #Fonction pour ajouter un chiffre en fonction du mois
+    if mois == 1: #Conditions si le mois est Janvier
+        calcultotal = calcultotal + 0
+    elif mois == 2: #Conditions si le mois est Fevrier
+        calcultotal = calcultotal + 3
+    elif mois == 3: #Conditions si le mois est Mars
+        calcultotal = calcultotal + 3
+    elif mois == 4: #Conditions si le mois est Avril
+        calcultotal = calcultotal + 6
+    elif mois == 5: #Conditions si le mois est Mai
+        calcultotal = calcultotal + 1
+    elif mois == 6: #Conditions si le mois est Juin
+        calcultotal = calcultotal + 4
+    elif mois == 7: #Conditions si le mois est Juillet
+        calcultotal = calcultotal + 6
+    elif mois == 8: #Conditions si le mois est Aout
+        calcultotal = calcultotal + 2
+    elif mois == 9: #Conditions si le mois est Septembre
+        calcultotal = calcultotal + 5
+    elif mois == 10: #Conditions si le mois est Octobre
+        calcultotal = calcultotal + 0
+    elif mois == 11: #Conditions si le mois est Novembre
+        calcultotal = calcultotal + 3
+    elif mois == 12: #Conditions si le mois est Decembre
+        calcultotal = calcultotal + 5
+    return calcultotal
+
+def calculanbiss(calcultotal): #Fonction calcul d'une année bissextile ou non
+    mod = int(annee)%4 #Annee modulo 4
+    mod2 = int(annee)%100 #Annee modulo 100
+    mod3 = int(annee)%400 #Annee modulo 400
+
+    if mod == 0 and mod2 != 0 and mois == 1 or mois == 2: #Conditions, si l'année est divisible par 4 et pas par 100 (donc bissextile) et que le mois est janvier ou fevrier on ote 1
+        calcultotal = calcultotal - 1
+    elif mod2 == 0 and mod3 == 0 and mois == 1 or mois == 2: #Conditions, si l'année est divisible par 100 et 400 (donc bissextile) et que le mois est janvier ou fevrier on ote 1
+        calcultotal = calcultotal - 1
+    else:
+        calcultotal = calcultotal
+    return calcultotal
+
+def calculan(calcultotal): #Fonction calcul du siècle
+    if recupannee2 == 16: #Condition si le siècle est 16
+        calcultotal = calcultotal + 6
+    elif recupannee2 == 17: #Condition si le siècle est 17
+        calcultotal = calcultotal + 4
+    elif recupannee2 == 18: #Condition si le siècle est 18
+        calcultotal = calcultotal + 2
+    elif recupannee2 == 19: #Condition si le siècle est 19
+        calcultotal = calcultotal + 0
+    elif recupannee2 == 20: #Condition si le siècle est 20
+        calcultotal = calcultotal + 6
+    elif recupannee2 == 21: #Condition si le siècle est 21
+        calcultotal = calcultotal + 4
+    return calcultotal
+
+
+#On fait appel aux fonctions et on récupère le résultat
+calcultotal = calculmois(calcultotal)
+calcultotal = calculanbiss(calcultotal)
+calcultotal = calculan(calcultotal)
+
+
+#calcultotal modulo 7 on garde le reste pour connaitre le jour de la date demandé
+modjour = int(calcultotal)%7
+
+if modjour == 0: #Conditions si le reste est égal à 0
+    print("Le jour de la date demandé était un Dimanche ")
+elif modjour == 1: #Conditions si le reste est égal à 1
+    print("Le jour de la date demandé était un Lundi")
+elif modjour == 2: #Conditions si le reste est égal à 2
+    print("Le jour de la date demandé était un Mardi")
+elif modjour == 3: #Conditions si le reste est égal à 3
+    print("Le jour de la date demandé était un Mercredi")
+elif modjour == 4: #Conditions si le reste est égal à 4
+    print("Le jour de la date demandé était un Jeudi")
+elif modjour == 5: #Conditions si le reste est égal à 5
+    print("Le jour de la date demandé était un Vendredi")
+elif modjour == 6: #Conditions si le reste est égal à 6
+    print("Le jour de la date demandé était un Samedi")
+
+
+
+
+
+
